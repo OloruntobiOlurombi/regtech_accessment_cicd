@@ -185,7 +185,11 @@ jobs:
 
       - name: Run Integration Tests inside Docker Container 
         run: |
-          docker run --rm -v $(pwd):/results 611512058022.dkr.ecr.us-east-1.amazonaws.com/regtech-app:${GITHUB_RUN_NUMBER} pytest --junitxml=integration-test-results.xml
+          docker run --rm -v $(pwd):/results 611512058022.dkr.ecr.us-east-1.amazonaws.com/regtech-app:${GITHUB_RUN_NUMBER} pytest --junitxml=/results/integration-test-results.xml
+
+      - name: List Files in Current Directory
+        run: |
+          ls -l 
 
       - name: Upload Integration Test Results 
         uses: actions/upload-artifact@v2 
@@ -230,7 +234,7 @@ jobs:
         echo "KUBECONFIG=$KUBECONFIG" >> $GITHUB_ENV 
         echo $KUBECONFIG 
 
-        
+
     - name: Deploy Autoscaler Just Once
       run: |
         kubectl apply -f ./cluster-autoscler.yaml
