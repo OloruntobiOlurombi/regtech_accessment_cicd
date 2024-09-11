@@ -230,6 +230,7 @@ jobs:
         echo "KUBECONFIG=$KUBECONFIG" >> $GITHUB_ENV 
         echo $KUBECONFIG 
 
+        
     - name: Deploy Autoscaler Just Once
       run: |
         kubectl apply -f ./cluster-autoscler.yaml
