@@ -160,7 +160,7 @@ jobs:
 
     - name: Build Image 
       run: | 
-        docker build -t flask-app .
+        docker build -t regtech-app .
         docker tag regtech-app:latest 611512058022.dkr.ecr.us-east-1.amazonaws.com/regtech-app:${GITHUB_RUN_NUMBER}
         docker push 611512058022.dkr.ecr.us-east-1.amazonaws.com/regtech-app:${GITHUB_RUN_NUMBER}
 
