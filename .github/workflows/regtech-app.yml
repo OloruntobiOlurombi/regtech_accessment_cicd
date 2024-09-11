@@ -26,7 +26,7 @@ jobs:
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master  
         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.ORGANIZATION_KEY }} 
           #ORGANIZATION_KEY: ${{ secrets.ORGANIZATION_KEY }} 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
         with:
@@ -229,6 +229,10 @@ jobs:
         aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }} --kubeconfig $KUBECONFIG
         echo "KUBECONFIG=$KUBECONFIG" >> $GITHUB_ENV 
         echo $KUBECONFIG 
+
+    - name: Deploy Autoscaler Just Once
+      run: |
+        kubectl apply -f ./cluster-autoscler.yaml
 
     - name: Deploy to EKS 
       run: |
