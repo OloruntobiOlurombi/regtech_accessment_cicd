@@ -193,7 +193,7 @@ jobs:
           ls -l 
 
       - name: Upload Integration Test Results 
-        uses: actions/upload-artifact@v2 
+        uses: actions/upload-artifact@v3 
         with: 
           name: integration-test-results
           path: integration-test-results.xml
