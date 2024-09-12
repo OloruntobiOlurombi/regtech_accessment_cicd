@@ -1,9 +1,10 @@
+import os
 from flask import Flask 
 from flask_wtf.csrf import CSRFProtect
 import secrets
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = secrets.token_hex(16)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', secrets.token_hex(16))
 
 csrf = CSRFProtect(app)
 
