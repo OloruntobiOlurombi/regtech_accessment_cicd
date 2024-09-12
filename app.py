@@ -1,12 +1,13 @@
 import os
-from flask import Flask 
+from flask import Flask
 from flask_wtf.csrf import CSRFProtect
-import secrets
 
 app = Flask(__name__)
 
-
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', secrets.token_urlsafe(32))
+secret_key = os.getenv('SECRET_KEY')
+if secret_key is None:
+    raise ValueError("No SECRET_KEY set for Flask application. Please set the SECRET_KEY environment variable.")
+app.config['SECRET_KEY'] = secret_key
 
 csrf = CSRFProtect(app)
 
