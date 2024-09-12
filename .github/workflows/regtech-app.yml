@@ -33,6 +33,7 @@ jobs:
           args: >
             -Dsonar.organization=${{ secrets.ORGANIZATION_KEY }}
             -Dsonar.projectKey=${{ secrets.PROJECT_KEY }} 
+            -Dsonar.exclusions=venv/**
             -Dsonar.c.file.suffixes=-
             -Dsonar.cpp.file.suffixes=-
             -Dsonar.objc.file.suffixes=-
@@ -233,11 +234,6 @@ jobs:
         aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }} --kubeconfig $KUBECONFIG
         echo "KUBECONFIG=$KUBECONFIG" >> $GITHUB_ENV 
         echo $KUBECONFIG 
-
-
-    - name: Deploy Autoscaler Just Once
-      run: |
-        kubectl apply -f ./cluster-autoscler.yaml
 
     - name: Deploy to EKS 
       run: |
