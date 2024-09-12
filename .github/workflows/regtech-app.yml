@@ -38,6 +38,10 @@ jobs:
             -Dsonar.cpp.file.suffixes=-
             -Dsonar.objc.file.suffixes=-
 
+      - name: Check SonarCloud Quality Gate 
+        run: |
+          curl -u ${{ secrets.SONAR_TOKEN }} "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ secrets.PROJECT_KEY }}" | grep '"status":"OK"' || exit 1
+
   UnitAndIntegrationTests:
     name: Unit and Integration Tests on Source Code
     runs-on: ubuntu-latest
