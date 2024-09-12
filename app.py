@@ -1,13 +1,9 @@
-import os
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
+from config import Config
 
 app = Flask(__name__)
-
-secret_key = os.getenv('SECRET_KEY')
-if secret_key is None:
-    raise ValueError("No SECRET_KEY set for Flask application. Please set the SECRET_KEY environment variable.")
-app.config['SECRET_KEY'] = secret_key
+app.config.from_object(Config)
 
 csrf = CSRFProtect(app)
 
