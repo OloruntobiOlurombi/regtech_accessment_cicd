@@ -247,7 +247,7 @@ jobs:
     - name: Check Deployment Status 
       id: check-status 
       run: |
-        kubectl rollot status deployment.apps/regtech-app-deployment || exit 
+        kubectl rollout status deployment.apps/regtech-app-deployment || exit 
 
     - name: Rollback Deployment 
       if: failure()
